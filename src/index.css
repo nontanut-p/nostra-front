@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-midnight-900 text-slate-200 font-sans antialiased;
+    margin: 0;
+    min-height: 100dvh;
+    /* Thai readability: comfortable line-height so tone marks never clip,
+       no letter-spacing on body (tracking breaks Thai mark placement). */
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Thai text must never be tracked / condensed — keep marks crisp. */
+  :lang(th) {
+    letter-spacing: normal;
+    word-break: normal;
+    line-break: normal;
+    line-height: 1.7;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  /* Custom slim scrollbars to match the dark luxe theme */
+  *::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3);
+    border-radius: 999px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.55);
+  }
+}
+
+@layer components {
+  /* Frosted panel surface used across widgets */
+  .panel {
+    @apply rounded-2xl border border-surface-border/60 bg-surface/70 backdrop-blur-md shadow-panel;
+  }
+
+  .panel-inset {
+    @apply rounded-xl border border-surface-border/40 bg-midnight-800/60;
+  }
+
+  /* Gold gradient text for brand + scores */
+  .text-gold-sheen {
+    @apply bg-gold-sheen bg-clip-text text-transparent;
+  }
+
+  /* Section label (small caps gold) */
+  .eyebrow {
+    @apply text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-gold/80;
+  }
+
+  /* Touch-friendly tap target — min 44x44 for elderly & children */
+  .tap {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Thin hairline divider with gold glow */
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-shadow-gold {
+    text-shadow: 0 0 18px rgba(212, 175, 55, 0.45);
+  }
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
